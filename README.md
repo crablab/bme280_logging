@@ -322,6 +322,12 @@ Click on InfluxDB and then add the appropriate information. The port should be, 
 
 Once created, you can then add a dashboard! I've included the JSON for one [here](https://github.com/crablab/bme280_logging/blob/master/grafana.json), but Grafana is really use to use so you can create your own if you like. 
 
+Mine looks like this:
+
+![grafana example](https://raw.githubusercontent.com/crablab/bme280_logging/master/Selection_399.png)
+
+(you can see it hasn't been running for very long!)
+
 ---
 
 And there you have it! An Arduino datalogger piping into Influx and with some pretty graphs in Grafana. You can play around with Grafana and even add more data sources to Influx for more fun. You may find that you can easily use Telegraf to intergrate existing applications into Influx/Grafana - Nginx for example has a plugin for this. 
