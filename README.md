@@ -304,6 +304,27 @@ If you want to verify that the data is coming through, go back to your Influx sh
 
 You can then add the other values in the same way. 
 
+In order to run your Python script on a server without having to bodge it together with Tmux, we can add it as a service to systemd. 
+
+This is super simple and you just need to create a file: `sudo nano /lib/systemd/system/weather.service`
+
+Add the following:
+
+```
+[Unit]
+Description=Weather Service
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python /root/main.py
+
+[Install]
+WantedBy=multi-user.target
+```
+
+And then set the permissions `sudo chmod 644 /lib/systemd/system/weather.service` before reloading systemd `sudo systemctl daemon-reload` and starting your new service `sudo service weather start`. If all is well you should see data coming through to Influx and running `sudo service weather status` should show it as running! If you restart the server, the script will start running automatically. 
+
 ## Grafana
 
 Grafana is a fancy application for drawing graphs. It's typically used to show metrics for servers and applications, to identify issues and trends. You can even connect it with stuff like PagerDuty to spam you with calls when your server dies in the middle of the night! 
